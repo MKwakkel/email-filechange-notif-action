@@ -69,6 +69,9 @@ done
 message="$message\n\nYou can view the changes using this link: $(jq -r ".compare" "$GITHUB_EVENT_PATH")"
 
 if [ ${#toNotify} -ne 0 ]; then
-	sendemail -f "$senderEmail" -bcc "${toNotify[@]}" -u "$subjectLine" -m "$message" -s "$smtpServer:$smtpPort" -o tls=yes -xu "$smtpUsername" -xp "$smtpPassword"
+    sendemail -f "$senderEmail" -bcc "${toNotify[@]}" -u "$subjectLine" -m "$message" -s "$smtpServer:$smtpPort" -o tls=yes -xu "$smtpUsername" -xp "$smtpPassword"
+    echo "Email sent!"
+else
+    echo "No email sent!"
 fi
 
