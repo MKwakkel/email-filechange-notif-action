@@ -24,14 +24,14 @@ inputs:
   smtpPassword:
     description: 'The SMTP password used to send E-Mails'
     required: true
-  githubToken:
-    description: 'Token used for cloning the repository'
-    required: false
-    default: ${{ github.token }}
   forceSending:
     description: 'Always send an email -- for testing'
     required: false
     default: false
+  githubToken:
+    description: 'Token used for cloning the repository'
+    required: false
+    default: ${{ github.token }}
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -43,8 +43,8 @@ runs:
     - ${{ inputs.smtpPort }}
     - ${{ inputs.smtpUsername }}
     - ${{ inputs.smtpPassword }}
-    - ${{ inputs.githubToken }}
     - ${{ inputs.forceSending }}
+    - ${{ inputs.githubToken }}
 branding:
   icon: mail
   color: white

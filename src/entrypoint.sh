@@ -12,8 +12,8 @@ smtpServer="$4"
 smtpPort="$5"
 smtpUsername="$6"
 smtpPassword="$7"
-githubToken="$8"
-forceSending="$9"
+forceSending="$8"
+githubToken="$9"
 
 if [ -z "$before" ]; then
 	echo 'Not a push event'
