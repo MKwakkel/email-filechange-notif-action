@@ -54,7 +54,7 @@ while read -r mailingListEntry; do
 	git check-ignore --no-index $changes
 	ignoreResult=$?
 	set -e
-	if [ $ignoreResult -eq 0 ]; then
+	if [ $ignoreResult -eq 0 ] || [ $forceSending ]; then
 		if [[ ! " ${toNotify[@]} " =~ " ${email} " ]]; then
 			if [[ "$email" != -* ]]; then
 				toNotify+=("$email")
@@ -70,7 +70,7 @@ done
 
 message="$message\n\nYou can view the changes using this link: $(jq -r ".compare" "$GITHUB_EVENT_PATH")"
 
-if [ ${#toNotify} -ne 0 ] || [ $forceSending ]; then
+if [ ${#toNotify} -ne 0 ]; then
     sendemail -f "$senderEmail" -bcc "${toNotify[@]}" -u "$subjectLine" -m "$message" -s "$smtpServer:$smtpPort" -o tls=auto -xu "$smtpUsername" -xp "$smtpPassword"
     echo "Email sent!"
 else
