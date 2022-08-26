@@ -28,6 +28,10 @@ inputs:
     description: 'Token used for cloning the repository'
     required: false
     default: ${{ github.token }}
+  forceSending:
+    description: 'Always send an email -- for testing'
+    required: false
+    default: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -40,6 +44,7 @@ runs:
     - ${{ inputs.smtpUsername }}
     - ${{ inputs.smtpPassword }}
     - ${{ inputs.githubToken }}
+    - ${{ inputs.forceSending }}
 branding:
   icon: mail
   color: white
